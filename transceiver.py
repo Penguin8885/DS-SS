@@ -25,7 +25,7 @@ def add_channel_interference(sp1, sp2, delay, SIR, EbNo):
 
     # SIRを設定 (amp1 = 1.0 を仮定)
     amp2 = 10.0 ** (-SIR / 20.0) # 電圧
-    sp2 * amp2
+    sp2 = sp2 * amp2
 
     # 遅延を設定
     delay_sp2 = np.hstack([remainder, sp2])[delay : -(len(sp2)-delay)] # 遅延した信号を生成
