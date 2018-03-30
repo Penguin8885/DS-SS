@@ -30,3 +30,28 @@ def mseq_127_203():
         register = np.roll(register, -1)            # レジスタの保持した値をシフト
 
     return m_seq
+
+# h(x) = x^5+x^2+1, [45], 符号長31 (= 2^5-1)
+def mseq_31_45():
+    register = np.ones(5 + 1, dtype=np.int) * -1    # レジスタ(出力を含む)を-1で初期化
+    m_seq = np.zeros(31, dtype=np.int)             # m_seqの配列を用意
+
+    for i in range(31):
+        m_seq[i] = register[0]                      # 線形帰還シフトレジスタの出力を配列へ代入
+        register[5] = register[2] * register[0]     # 生成多項式の計算結果を一番後ろ(配線上)で保持
+        register = np.roll(register, -1)            # レジスタの保持した値をシフト
+
+    return m_seq
+
+# h(x) = x^5+x^4+x^3+x^2+1, [75], 符号長31 (= 2^5-1)
+def mseq_31_75():
+    register = np.ones(5 + 1, dtype=np.int) * -1    # レジスタ(出力を含む)を-1で初期化
+    m_seq = np.zeros(31, dtype=np.int)             # m_seqの配列を用意
+
+    for i in range(31):
+        m_seq[i] = register[0]                      # 線形帰還シフトレジスタの出力を配列へ代入
+        register[5] = register[4] * register[3] *register[2] * register[0]
+                                                    # 生成多項式の計算結果を一番後ろ(配線上)で保持
+        register = np.roll(register, -1)            # レジスタの保持した値をシフト
+
+    return m_seq
